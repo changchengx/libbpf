@@ -1,0 +1,6 @@
+libbpf for Debian
+
+libbpf is from $(KERNEL_SRC)/tools/lib/bpf, create
+debian package under /usr/local/bpf for study eBPF
+
+ -- Liu Changcheng <changcheng.liu@aliyun.com>  Sat, 4 Jan 2020 10:04:39 +0800

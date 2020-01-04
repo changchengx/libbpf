@@ -1,0 +1,6 @@
+libbpf (0.0.5-1ubuntu1) UNRELEASED; urgency=medium
+
+  * Initial release.
+  * commit tags/v0.0.5
+
+ -- Changcheng Liu <changcheng.liu@aliyun.com>  Sat, 04 Jan 2020 09:54:04 +0800

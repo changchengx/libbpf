@@ -1,0 +1,13 @@
+Source: libbpf
+Section: libs
+Priority: optional
+Maintainer: Liu Changcheng <changcheng.liu@intel.com>
+Build-Depends: debhelper (>=9)
+Standards-Version: 4.1.4
+Homepage: https://github.com/libbpf/libbpf.git
+
+Package: libbpf
+Architecture: linux-any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: userspace development tools for bpf

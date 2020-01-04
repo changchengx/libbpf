@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# You must remove unused comment lines for the released package.
+export DH_VERBOSE = 1
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	cd src && make PREFIX=/usr/local/bpf
+
+override_dh_auto_install:
+	cd src && make PREFIX=debian/usr/local/bpf install
+	cp -arf src/debian debian/libbpf
+
+override_dh_auto_clean:
+	cd src && make clean
+
+override_dh_installdocs:
+	echo "skip document"
+
+override_dh_installchangelogs:
+	echo "skip changelog"
+
+override_dh_usrlocal:
+	echo "ubuntu don't allow file in /usr/local, skip check"
