@@ -48,6 +48,8 @@ endif
 HEADERS := bpf.h libbpf.h btf.h xsk.h libbpf_util.h
 UAPI_HEADERS := $(addprefix $(TOPDIR)/include/uapi/linux/,\
 			    bpf.h bpf_common.h btf.h if_link.h if_xdp.h netlink.h)
+LINUX_HEADERS := $(addprefix $(TOPDIR)/include/linux/,\
+			    compiler.h err.h filter.h kernel.h list.h overflow.h ring_buffer.h types.h)
 
 PC_FILE := $(OBJDIR)/libbpf.pc
 
@@ -65,6 +67,7 @@ PREFIX ?= /usr
 LIBDIR ?= $(PREFIX)/$(LIBSUBDIR)
 INCLUDEDIR ?= $(PREFIX)/include
 UAPIDIR ?= $(PREFIX)/include/uapi
+LINUXDIR ?= $(PREFIX)/include
 
 all: $(STATIC_LIBS) $(SHARED_LIBS) $(PC_FILE)
 
@@ -115,7 +118,7 @@ define do_s_install
 	cp -fpR $1 '$(DESTDIR)$2'
 endef
 
-install: all install_headers install_pkgconfig install_uapi_headers
+install: all install_headers install_pkgconfig install_uapi_headers install_linux_headers
 	$(call do_s_install,$(STATIC_LIBS) $(SHARED_LIBS),$(LIBDIR))
 
 install_headers:
@@ -125,6 +128,9 @@ install_headers:
 # in by install rule.
 install_uapi_headers:
 	$(call do_install,$(UAPI_HEADERS),$(UAPIDIR)/linux,644)
+
+install_linux_headers:
+	$(call do_install, $(LINUX_HEADERS),$(LINUXDIR)/linux,644)
 
 install_pkgconfig: $(PC_FILE)
 	$(call do_install,$(PC_FILE),$(LIBDIR)/pkgconfig,644)
